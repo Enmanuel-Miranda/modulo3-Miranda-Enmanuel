@@ -1,0 +1,238 @@
+openapi: 3.0.1
+tags:
+- name: ReservaController
+  description: Operaciones relacionadas a reservas
+- name: UsuarioController
+  description: Operaciones relacionadas a usuarios
+paths:
+  /reservas/actualizar:
+    put:
+      tags:
+      - ReservaController
+      summary: Actualizar una reserva
+      operationId: actualizarReserva
+      requestBody:
+        description: Datos actualizados de la reserva
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reserva'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /reservas/crear:
+    post:
+      tags:
+      - ReservaController
+      summary: Crear una nueva reserva
+      operationId: crearReserva
+      requestBody:
+        description: Datos de la reserva
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reserva'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /reservas/eliminar:
+    delete:
+      tags:
+      - ReservaController
+      summary: Eliminar una reserva por ID
+      operationId: eliminarReserva
+      parameters:
+      - name: id
+        in: query
+        description: ID de la reserva
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /reservas/listar:
+    get:
+      tags:
+      - ReservaController
+      summary: Listar todas las reservas
+      operationId: listarReservas
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reserva'
+  /reservas/obtener:
+    get:
+      tags:
+      - ReservaController
+      summary: Obtener una reserva por ID
+      operationId: obtenerReserva
+      parameters:
+      - name: id
+        in: query
+        description: ID de la reserva
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reserva'
+  /usuarios/actualizar:
+    put:
+      tags:
+      - UsuarioController
+      summary: Actualizar datos de un usuario
+      operationId: actualizarUsuario
+      requestBody:
+        description: Datos actualizados del usuario
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /usuarios/crear:
+    post:
+      tags:
+      - UsuarioController
+      summary: Crear un nuevo usuario
+      operationId: crearUsuario
+      requestBody:
+        description: Datos del nuevo usuario
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /usuarios/eliminar:
+    delete:
+      tags:
+      - UsuarioController
+      summary: Eliminar un usuario por ID
+      operationId: eliminarUsuario
+      parameters:
+      - name: id
+        in: query
+        description: ID del usuario
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /usuarios/listar:
+    get:
+      tags:
+      - UsuarioController
+      summary: Listar todos los usuarios
+      operationId: listarUsuarios
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Usuario'
+  /usuarios/obtener:
+    get:
+      tags:
+      - UsuarioController
+      summary: Obtener un usuario por ID
+      operationId: obtenerUsuario
+      parameters:
+      - name: id
+        in: query
+        description: ID del usuario
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+components:
+  schemas:
+    Reserva:
+      required:
+      - cantidadPersonas
+      - fechaHora
+      - idUsuario
+      type: object
+      properties:
+        idReserva:
+          type: integer
+          description: ID de la reserva
+          format: int32
+          example: 1
+        idUsuario:
+          type: integer
+          description: ID del usuario que realiza la reserva
+          format: int32
+          example: 10
+        cantidadPersonas:
+          type: integer
+          description: Cantidad de personas para la reserva
+          format: int32
+          example: 4
+        fechaHora:
+          type: string
+          description: Fecha y hora de la reserva
+          format: date-time
+      description: Entidad que representa una reserva
+    Usuario:
+      required:
+      - nombre
+      - usuario
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID del usuario
+          format: int32
+          example: 1
+        usuario:
+          type: string
+          description: Nombre de usuario (username)
+          example: jdoe
+        nombre:
+          type: string
+          description: Nombre completo del usuario
+          example: Juan Doe
+      description: Entidad que representa a un usuario
